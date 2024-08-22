@@ -1,13 +1,16 @@
+#ifndef _GLOBAL_H_
+#define _GLOBAL_H_
+
 #include <graphics.h>
 
-#define SPACE 0
-#define WALL 1
-#define DOOR 2
-#define UPSTARE 3
-#define DOWNSTARE 4
-#define CARACTER 5
-#define WEAPHON 6
-#define MONSTER 7
+// #define SPACE 0
+// #define WALL 1
+// #define DOOR 2
+// #define UPSTARE 3
+// #define DOWNSTARE 4
+// #define CARACTER 5
+// #define WEAPHON 6
+// #define MONSTER 7
 
 #define GRID 32
 #define BIG_GRID 48
@@ -19,13 +22,20 @@
 
 extern PIMAGE GLO_PNG;
 extern PIMAGE BIG_GLO_PNG;
+extern PIMAGE SLIME_PNG;
+extern PIMAGE WALL_PNG;
+extern PIMAGE SPACE_PNG;
+extern PIMAGE PLAYER_PNG;
 
-extern int health;
-extern int attack;
-extern int defeat;
-extern int money;
+extern int Health;
+extern int Attack;
+extern int Defence;
+extern int Money;
 extern int level;
 extern int redKey;
 extern int yelloKey;
 extern int blueKey;
 extern int greenKey;
+extern char underWord[100];
+
+#endif

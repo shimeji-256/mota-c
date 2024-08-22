@@ -7,7 +7,7 @@
 
 int main() {
     int x, y, h, lp = 0;
-    initgraph(1008, 672, INIT_RENDERMANUAL);
+    initgraph(1008, 650, INIT_RENDERMANUAL);
     setbkcolor(GRAY);
     setfillcolor(GRAY);
     setcaption("mota");

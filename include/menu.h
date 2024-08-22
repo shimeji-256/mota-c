@@ -8,8 +8,8 @@ class Menu {
         PIMAGE floorImg;
         PIMAGE heartImg;
         PIMAGE attackImg;
-        PIMAGE ExpImg;
-        PIMAGE MonegBagImg;
+        PIMAGE defenceImg;
+        PIMAGE monegBagImg;
     public:
         int load();
         int update();
