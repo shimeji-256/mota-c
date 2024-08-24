@@ -31,11 +31,15 @@ extern int Health;
 extern int Attack;
 extern int Defence;
 extern int Money;
-extern int level;
+extern int Level;
 extern int redKey;
 extern int yelloKey;
 extern int blueKey;
 extern int greenKey;
+extern int X;
+extern int Y;
+extern int Dx;
+extern int Dy;
 extern char underWord[100];
 
 #endif

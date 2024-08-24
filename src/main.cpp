@@ -4,6 +4,8 @@
 #include "tools.h"
 #include "global.h"
 #include "menu.h"
+// #include "keymsg.h"
+#include "contr.h"
 
 int main() {
     int x, y, h, lp = 0;
@@ -17,6 +19,9 @@ int main() {
     initAll();
     while (is_run()) {
         delay_fps(120);
+        cleardevice();
+        // keymsg.update();
+        contr.update();
         menu.update();
     }
     

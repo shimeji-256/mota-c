@@ -2,7 +2,7 @@
 #include "global.h"
 
 monster::monster() {
-    cat = 4;
+    cat = 3;
     heart = 35;
     attack = 18;
     defence = 1;
@@ -16,7 +16,10 @@ int monster::react() {
         heart -= enemyHert;
         Health -= myHert;   
     }
-    return 0;
+    
+    if(heart <= 0)
+        return 1;
+    return -1;
 }
 
 monster monst;

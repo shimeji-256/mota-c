@@ -47,7 +47,7 @@ int initMap() {
                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-    tf = new Floor(0, 0, testfloor);
+    tf = new Floor(1 , 0, 0, testfloor);
     return 0;
 }
 

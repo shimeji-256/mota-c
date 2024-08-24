@@ -34,10 +34,14 @@ class Floor {
 private:
     int posX, posY;
     int inposX, inposY;
+    int level;
     obj* op[11][11];
 public:
-    Floor(int x, int y, int p[11][11]);
+    Floor(int level, int x, int y, int p[11][11]);
+    int getLevel();
+    int toFloor();
     int printFloor(int x, int y);
+    int moveAndRea();
 };
 
 // extern Floor floor;
