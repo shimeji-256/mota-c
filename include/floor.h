@@ -19,7 +19,7 @@
 // enum equipTh{
 //     SOWDER,
 // };
-#include "obj.h"
+#include "space.h"
 
 enum objectTh{
     SPACE,
@@ -35,7 +35,7 @@ private:
     int posX, posY;
     int inposX, inposY;
     int level;
-    obj* op[11][11];
+    Space* op[11][11];
 public:
     Floor(int level, int x, int y, int p[11][11]);
     int getLevel();

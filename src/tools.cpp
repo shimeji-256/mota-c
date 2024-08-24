@@ -4,7 +4,7 @@
 #include "global.h"
 #include "menu.h"
 #include "tools.h"
-#include "wall.h"
+#include "structBlock.h"
 #include "monster.h"
 #include "floor.h"
 
@@ -28,7 +28,6 @@ int initImg() {
 void getComic(PIMAGE* DST, int x, int y, int h) {
     *DST = newimage();
     getimage(*DST, BIG_GLO_PNG, x*BIG_GRID, y*BIG_GRID, h*BIG_GRID, h*BIG_GRID);
-    // return newImg;
 }
 
 // int initMonster() {

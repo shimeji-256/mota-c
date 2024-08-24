@@ -16,6 +16,8 @@
 #define BIG_GRID 48
 
 #define fps 60
+#define SCREEN_WIDTH 1008
+#define SCREEN_HEIGHT 650
 #define RrightBord 24
 #define Rwidth 144
 #define Rheight 28
@@ -32,14 +34,13 @@ extern int Attack;
 extern int Defence;
 extern int Money;
 extern int Level;
-extern int redKey;
-extern int yelloKey;
-extern int blueKey;
-extern int greenKey;
+extern int keyGroup[4];
 extern int X;
 extern int Y;
 extern int Dx;
 extern int Dy;
 extern char underWord[100];
+
+void printfUnder(const char *__format, ...);
 
 #endif

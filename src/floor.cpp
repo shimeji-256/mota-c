@@ -1,7 +1,7 @@
 #include <cstdio>
 
 #include "floor.h"
-#include "wall.h"
+#include "structBlock.h"
 #include "monster.h"
 #include "global.h"
 
@@ -35,7 +35,7 @@ int Floor::toFloor() {
     return 0;
 }
 
-int Floor::getLevel(){
+int Floor::getLevel() {
     return level;
 }
 
@@ -49,25 +49,22 @@ int Floor::printFloor(int x, int y) {
     return 0;
 }
 
-int Floor::moveAndRea(){
+int Floor::moveAndRea() {
     int tmpX = X + Dx, tmpY = Y + Dy;
     Dx = 0;
     Dy = 0;
-    if(tmpX < 0 || tmpY < 0 || tmpX > 10 || tmpY > 10){
-        return 1;
-        // printf("wall/n");
+    if (tmpX < 0 || tmpY < 0 || tmpX > 10 || tmpY > 10) {
+        printfUnder("hit the wall");
+        return 0;
     }
     int cat = op[tmpX][tmpY]->getCat();
-    if(cat == WALL){
-        // printf("wall/n");
-        return 1;
-    }else{
+    if (cat != WALL) {
         X = tmpX;
         Y = tmpY;
-        if(op[X][Y]->react() == 1){
-            op[X][Y] = &sp;
-        }
     }
 
+    if (op[tmpX][tmpY]->react() == 1) {
+        op[tmpX][tmpY] = &sp;
+    }
     return 0;
 }

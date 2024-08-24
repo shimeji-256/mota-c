@@ -10,6 +10,10 @@ class Menu {
         PIMAGE attackImg;
         PIMAGE defenceImg;
         PIMAGE monegBagImg;
+        PIMAGE yelloKeyImg;
+        PIMAGE blueKeyImg;
+        PIMAGE redKeyImg;
+        PIMAGE greenKeyImg;
     public:
         int load();
         int update();

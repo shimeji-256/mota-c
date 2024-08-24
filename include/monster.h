@@ -1,8 +1,9 @@
-#include <graphics.h>
+#ifndef _MONSTER_H_
+#define _MONSTER_H_
 
-#include "obj.h"
+#include "space.h"
 
-class monster : public obj{
+class monster : public Space{
 private:
     int heart, attack, defence, money;
 public:
@@ -11,3 +12,5 @@ public:
 };
 
 extern monster monst;
+
+#endif

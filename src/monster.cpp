@@ -1,3 +1,5 @@
+#include <cstdio>
+
 #include "monster.h"
 #include "global.h"
 
@@ -10,16 +12,20 @@ monster::monster() {
 }
 
 int monster::react() {
-    int enemyHert = ((attack - Defence) > 0 ? (attack - Defence): 0);
-    int myHert = ((Attack - defence) > 0 ? (Attack - defence): 0);
-    while (heart > 0 && Health > 0) {
-        heart -= enemyHert;
-        Health -= myHert;   
+    int enemyHurt = ((attack - Defence) > 0 ? (attack - Defence): 0);
+    int myHurt = ((Attack - defence) > 0 ? (Attack - defence): 0);
+    int tmpMonsterHeart = heart;
+    while (tmpMonsterHeart > 0 && Health > 0) {
+        tmpMonsterHeart -= enemyHurt;
+        Health -= myHurt;   
     }
     
-    if(heart <= 0)
-        return 1;
-    return -1;
+    if(tmpMonsterHeart > 0)
+        return -1;
+    
+    Money += money;
+    sprintf(underWord, "get %d coin", money);
+    return 1;
 }
 
 monster monst;
