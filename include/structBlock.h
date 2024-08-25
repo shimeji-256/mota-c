@@ -17,7 +17,16 @@ public:
     Door(int doorCat);
 };
 
+class Stair : public Space {
+private:
+    int stairCat;
+public:
+    int react();
+    Stair(int stairCat);
+};
+
 extern Wall wall;
 extern Door door[4];
+extern Stair stair[2];
 
 #endif

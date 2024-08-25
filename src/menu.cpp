@@ -1,4 +1,3 @@
-#include <cstdio>
 #include <graphics.h>
 
 #include "global.h"
@@ -93,7 +92,7 @@ int Menu::update() {
 
     xyprintf(0, 13 * BIG_GRID, "%s", underWord);
 
-    tf->printFloor(5 * BIG_GRID, BIG_GRID);
+    currentFloor->printFloor(5 * BIG_GRID, BIG_GRID);
     return 0;
 }
 

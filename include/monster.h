@@ -1,16 +1,24 @@
 #ifndef _MONSTER_H_
 #define _MONSTER_H_
 
-#include "space.h"
+#include <vector>
+#include <string>
 
-class monster : public Space{
+#include "space.h"
+#include "global.h"
+
+class Monster : public Space{
 private:
+    std::vector<PIMAGE> *FACE;
+    char name[20];
+    int time, selected;
     int heart, attack, defence, money;
 public:
-    monster();
+    Monster(const char* name, int heart, int attack, int defence, int money, std::vector<PIMAGE> *FS);
+    int putSelfImg(int x, int y);
     int react();
 };
 
-extern monster monst;
+extern Monster *monsterGroup[monsterNum];
 
 #endif

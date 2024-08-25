@@ -1,18 +1,17 @@
 #include <graphics.h>
-#include <cstdio>
 
 #include "contr.h"
-#include "tools.h"
+#include "floor.h"
 #include "global.h"
-// #include "keymsg.h"
+#include "tools.h"
 
 void positionOffset(int key);
 
 bool keyIsPressed[256] = { false };
 
 int Contr::update() {
-    if (Level != tf->getLevel()) {
-        tf->toFloor();
+    if (Level != currentFloor->getLevel()) {
+        currentFloor->toFloor();
     } else {
         while (kbmsg()) {
             key_msg msg = getkey();
@@ -39,11 +38,12 @@ void positionOffset(int key) {
     switch (key) {
     case 'A': case key_left:	Dx = -1;	break;	//左移
     case 'W': case key_up:		Dy = -1;	break;	//上移
-    case 'D': case key_right:	Dx = 1;	break;	//右移
-    case 'S': case key_down:	Dy = 1;	break;	//下移
+    case 'D': case key_right:	Dx = 1;	    break;	//右移
+    case 'S': case key_down:	Dy = 1;	    break;	//下移
+    case key_esc: exit(0); break;
     default:  break;	//其他键不移动
     }
-    tf->moveAndRea();
+    currentFloor->moveAndRea();
 }
 
 Contr contr;

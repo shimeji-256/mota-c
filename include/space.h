@@ -9,7 +9,8 @@ public:
     PIMAGE* im;
     int getCat();
     int getSelfImg(PIMAGE * SOURCE);
-    int putSelfImg(int x, int y);
+    // int getSelfImg(int x, int y, int h);
+    virtual int putSelfImg(int x, int y);
     virtual int react();
     Space();
 };

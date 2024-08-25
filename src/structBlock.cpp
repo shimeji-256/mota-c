@@ -1,5 +1,6 @@
 #include "structBlock.h"
 #include "global.h"
+#include "floor.h"
 
 Wall::Wall() {
     cat = 1;
@@ -15,13 +16,24 @@ Door::Door(int doorCat) {
     this->doorCat = doorCat;
 }
 
-int Door::react(){
-    if(keyGroup[doorCat]){
+int Door::react() {
+    if (keyGroup[doorCat]) {
         keyGroup[doorCat]--;
         return 1;
     }
     return 0;
 }
 
+Stair::Stair(int stairCat) {
+    cat = 1;
+    this->stairCat = stairCat;
+}
+
+int Stair::react() {
+    doStairs(stairCat);
+    return 0;
+}
+
 Wall wall;
-Door door[4] = {Door(0), Door(1), Door(2), Door(3)};
+Door door[4] = { Door(0), Door(1), Door(2), Door(3) };
+Stair stair[2] = { Stair(-1), Stair(1) };

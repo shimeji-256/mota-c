@@ -23,7 +23,6 @@ int main() {
         menu.update();
     }
     
-    getch();
     closegraph();
     return 0;
 }
