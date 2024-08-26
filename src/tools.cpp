@@ -22,6 +22,11 @@ int getCo(std::vector<PIMAGE>* K, int x, int y, int h, bool vet, int num) {
             (*K)[i] = newimage();
             getComic(&(*K)[i], x + i * h, y, h);
         }
+    } else {
+        for (int i = 0; i < num; i++) {
+            (*K)[i] = newimage();
+            getComic(&(*K)[i], x, i * h + y, h);
+        }
     }
     return 0;
 }
@@ -37,7 +42,7 @@ int initImg() {
     putimage(BIG_GLO_PNG, 0, 0, (int)(1.5 * getwidth(GLO_PNG)), (int)(1.5 * getheight(GLO_PNG)), GLO_PNG, 0, 0, getwidth(GLO_PNG), getheight(GLO_PNG));
     getComic(&WALL_PNG, 0, 65, 1);
     getComic(&SPACE_PNG, 0, 0, 1);
-    getComic(&PLAYER_PNG, 0, 24, 1);
+    getComic(&BOOM_PNG, 0, 63, 1);
     getComic(&DOWNSTAIR_PNG, 0, 61, 1);
     getComic(&UPSTAIR_PNG, 1, 61, 1);
     getComic(&YELLOW_KEY_PNG, 0, 38, 1);
@@ -52,13 +57,7 @@ int initImg() {
     getComic(&BLUE_DOOR_PNG, 1, 73, 1);
     getComic(&RED_DOOR_PNG, 2, 73, 1);
     getComic(&GREEN_DOOR_PNG, 3, 73, 1);
-    // getComic(&, , , );
-    // getComic(&, , , );
-    // getComic(&, , , );
-    // getComic(&, , , );
-    // getComic(&, , , );
     sp.getSelfImg(&SPACE_PNG);
-    wall.getSelfImg(&WALL_PNG);
     stair[0].getSelfImg(&DOWNSTAIR_PNG);
     stair[1].getSelfImg(&UPSTAIR_PNG);
     keys[0].getSelfImg(&YELLOW_KEY_PNG);
@@ -73,6 +72,19 @@ int initImg() {
     door[1].getSelfImg(&BLUE_DOOR_PNG);
     door[2].getSelfImg(&RED_DOOR_PNG);
     door[3].getSelfImg(&GREEN_DOOR_PNG);
+
+    PLAYER_GROUP_PNG.resize(playerPngNum);
+    getCo(&PLAYER_GROUP_PNG[0], 0, 24, 1, 1, 4);
+    getCo(&PLAYER_GROUP_PNG[1], 0, 25, 1, 1, 4);
+    getCo(&PLAYER_GROUP_PNG[2], 0, 26, 1, 1, 4);
+    getCo(&PLAYER_GROUP_PNG[3], 0, 27, 1, 1, 4);
+
+    DOOR_DEATH_PNG.resize(doorNum);
+    getCo(&DOOR_DEATH_PNG[0], 0, 73, 1, 0, 4);
+    getCo(&DOOR_DEATH_PNG[1], 1, 73, 1, 0, 4);
+    getCo(&DOOR_DEATH_PNG[2], 2, 73, 1, 0, 4);
+    getCo(&DOOR_DEATH_PNG[3], 3, 73, 1, 0, 4);
+
     MONSTER_GROUP_PNG.resize(monsterNum);
     getCo(&MONSTER_GROUP_PNG[0], 0, 1, 1, 1, 2);
     getCo(&MONSTER_GROUP_PNG[1], 2, 1, 1, 1, 2);
@@ -182,7 +194,7 @@ int initMap() {
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                        {0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 100, 0, 0, 0, 0, 1, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -224,7 +236,10 @@ int initAttribute() {
     Defence = 2;
     Money = 0;
     Level = 1;
-    keyGroup[4] = {};
+    // keyGroup[4];
+    CUR_PLAYER_ROW = &PLAYER_GROUP_PNG[0];
+    CUR_PLAYER_PNG_ID = 0;
+    TIME = 0;
     printfUnder("finish init");
 
     X = 0;

@@ -2,19 +2,41 @@
 #define _SPACE_H_
 
 #include <graphics.h>
+#include <vector>
 
 class Space {
 public:
     int cat;
     PIMAGE* im;
     int getCat();
-    int getSelfImg(PIMAGE * SOURCE);
-    // int getSelfImg(int x, int y, int h);
+    int getSelfImg(PIMAGE* SOURCE);
     virtual int putSelfImg(int x, int y);
     virtual int react();
+    virtual Space* death();
     Space();
 };
 
+class Monster_Death : public Space {
+private:
+    int time;
+public:
+    int putSelfImg(int x, int y);
+    Monster_Death();
+};
+
+class Door_Death : public Space {
+private:
+    int wallCat;
+    int time;
+    short select;
+    std::vector<PIMAGE>* com;
+public:
+    int putSelfImg(int x, int y);
+    Door_Death(int wallCat);
+};
+
 extern Space sp;
+extern Monster_Death monster_death;
+extern Door_Death wall_death[4];
 
 #endif

@@ -3,6 +3,7 @@
 #include "floor.h"
 
 Wall::Wall() {
+    im = &WALL_PNG;
     cat = 1;
 }
 
@@ -22,6 +23,10 @@ int Door::react() {
         return 1;
     }
     return 0;
+}
+
+Space* Door::death(){
+    return new Door_Death(doorCat);
 }
 
 Stair::Stair(int stairCat) {

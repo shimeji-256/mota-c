@@ -16,6 +16,7 @@ private:
 public:
     Monster(const char* name, int heart, int attack, int defence, int money, std::vector<PIMAGE> *FS);
     int putSelfImg(int x, int y);
+    Space* death();
     int react();
 };
 

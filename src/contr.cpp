@@ -36,10 +36,10 @@ int Contr::update() {
 void positionOffset(int key) {
     Dx = Dy = 0;
     switch (key) {
-    case 'A': case key_left:	Dx = -1;	break;	//左移
-    case 'W': case key_up:		Dy = -1;	break;	//上移
-    case 'D': case key_right:	Dx = 1;	    break;	//右移
-    case 'S': case key_down:	Dy = 1;	    break;	//下移
+    case 'A': case key_left:	Dx = -1;	CUR_PLAYER_ROW = &PLAYER_GROUP_PNG[1]; break;	//左移
+    case 'W': case key_up:		Dy = -1;	CUR_PLAYER_ROW = &PLAYER_GROUP_PNG[3]; break;	//上移
+    case 'D': case key_right:	Dx = 1;	    CUR_PLAYER_ROW = &PLAYER_GROUP_PNG[2]; break;	//右移
+    case 'S': case key_down:	Dy = 1;	    CUR_PLAYER_ROW = &PLAYER_GROUP_PNG[0]; break;	//下移
     case key_esc: exit(0); break;
     default:  break;	//其他键不移动
     }

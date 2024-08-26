@@ -4,6 +4,7 @@
 #include "global.h"
 
 Monster::Monster(const char* name, int heart, int attack, int defence, int money, std::vector<PIMAGE>* FS) {
+    cat = 2;
     sprintf(this->name, "%s", name);
     this->heart = heart;
     this->attack = attack;
@@ -36,11 +37,15 @@ int Monster::react() {
 int Monster::putSelfImg(int x, int y) {
     putimage_withalpha(NULL, (*FACE)[selected], x, y);
     time ++;
-    if(time >= 50){
+    if(time > 30){
         selected = (selected+1)%((*FACE).size());
         time = 0;
     }
     return 0;
+}
+
+Space* Monster::death(){
+    return new Monster_Death();
 }
 
 Monster* monsterGroup[monsterNum];

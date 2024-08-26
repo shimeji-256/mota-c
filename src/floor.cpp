@@ -20,6 +20,16 @@ int doStairs(int i) {
     return 0;
 }
 
+int printfPlayer(int x, int y) {
+    putimage_withalpha(NULL, (*CUR_PLAYER_ROW)[CUR_PLAYER_PNG_ID], x + X * BIG_GRID, y + Y * BIG_GRID);
+    TIME++;
+    if (TIME >= 30) {
+        CUR_PLAYER_PNG_ID = (CUR_PLAYER_PNG_ID + 1) % ((*CUR_PLAYER_ROW).size());
+        TIME = 0;
+    }
+    return 0;
+}
+
 Floor::Floor(int level, int upX, int upY, int downX, int downY, short floorMsg[11][11]) {
     this->level = level;
     upPosX = upX;
@@ -45,7 +55,7 @@ Floor::Floor(int level, int upX, int upY, int downX, int downY, short floorMsg[1
             case BLOOD_BOTTLE_B: op[i][j] = &bloodBottles[1]; break;
             case ATTACK_JEW: op[i][j] = &attackJew; break;
             case DEFENCE_JEW: op[i][j] = &defenceJew; break;
-            // case YELLO_DOOR: op[i][j] = &stair[1]; break;
+                // case YELLO_DOOR: op[i][j] = &stair[1]; break;
             default: op[i][j] = monsterGroup[floorMsg[j][i] - 100]; break;
             }
         }
@@ -71,12 +81,14 @@ int Floor::getLevel() {
 }
 
 int Floor::printFloor(int x, int y) {
+    printfPlayer(x, y);
     for (int i = 0; i < 11; i++) {
         for (int j = 0; j < 11; j++) {
-            op[i][j]->putSelfImg(x + i * BIG_GRID, y + j * BIG_GRID);
+            if(op[i][j]->putSelfImg(x + i * BIG_GRID, y + j * BIG_GRID)){
+                op[i][j] = &sp;
+            }
         }
     }
-    putimage_withalpha(NULL, PLAYER_PNG, x + X * BIG_GRID, y + Y * BIG_GRID);
     return 0;
 }
 
@@ -93,9 +105,8 @@ int Floor::moveAndRea() {
         X = tmpX;
         Y = tmpY;
     }
-
     if (op[tmpX][tmpY]->react() == 1) {
-        op[tmpX][tmpY] = &sp;
+        op[tmpX][tmpY] = op[tmpX][tmpY]->death();
     }
     return 0;
 }

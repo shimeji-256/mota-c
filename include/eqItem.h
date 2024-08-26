@@ -46,4 +46,13 @@ public:
 
 extern DefenceJew defenceJew;
 
+class Sword: public Space{
+    private:
+    char name[20];
+    int defence;
+    public:
+    int react();
+    Sword(int defen);
+};
+
 #endif

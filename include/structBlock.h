@@ -14,6 +14,7 @@ private:
     int doorCat;
 public:
     int react();
+    Space* death();
     Door(int doorCat);
 };
 
@@ -23,6 +24,20 @@ private:
 public:
     int react();
     Stair(int stairCat);
+};
+
+class Shop : public Space {
+private:
+    class surrondShop : public Space {
+    public:
+        int react();
+    };
+    surrondShop ss[2];
+    int shopCat;
+public:
+    int react();
+    Shop(int cat);
+
 };
 
 extern Wall wall;

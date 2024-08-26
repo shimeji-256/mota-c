@@ -14,6 +14,8 @@
 #define Rwidth 144
 #define Rheight 28
 #define monsterNum 40
+#define playerPngNum 4
+#define doorNum 4
 
 #define minFloor 0
 
@@ -23,7 +25,6 @@ extern PIMAGE UPSTAIR_PNG;
 extern PIMAGE DOWNSTAIR_PNG;
 extern PIMAGE WALL_PNG;
 extern PIMAGE SPACE_PNG;
-extern PIMAGE PLAYER_PNG;
 extern PIMAGE YELLOW_KEY_PNG;
 extern PIMAGE BLUE_KEY_PNG;
 extern PIMAGE RED_KEY_PNG;
@@ -36,7 +37,12 @@ extern PIMAGE YELLOW_DOOR_PNG;
 extern PIMAGE BLUE_DOOR_PNG;
 extern PIMAGE RED_DOOR_PNG;
 extern PIMAGE GREEN_DOOR_PNG;
+extern PIMAGE BOOM_PNG;
 extern std::vector<std::vector<PIMAGE>> MONSTER_GROUP_PNG;
+extern std::vector<std::vector<PIMAGE>> PLAYER_GROUP_PNG;
+extern std::vector<std::vector<PIMAGE>> DOOR_DEATH_PNG;
+extern std::vector<PIMAGE> *CUR_PLAYER_ROW;
+extern int CUR_PLAYER_PNG_ID;
 
 extern int Health;
 extern int Attack;
@@ -48,6 +54,7 @@ extern int X;
 extern int Y;
 extern int Dx;
 extern int Dy;
+extern int TIME;
 extern char underWord[100];
 
 void printfUnder(const char *src);
