@@ -3,11 +3,11 @@
 #include "tools.h"
 
 Space::Space() {
-    cat = 0;
+    transparent = 0;
 }
 
 int Space::getCat() {
-    return cat;
+    return transparent;
 }
 
 int Space::putSelfImg(int x, int y) {
@@ -39,11 +39,11 @@ int Space::react() {
 Monster_Death::Monster_Death() {
     im = &BOOM_PNG;
     time = 0;
-    cat = 0;
+    transparent = 0;
 }
 
 int Monster_Death::putSelfImg(int x, int y) {
-    if (time < 50) {
+    if (time < 20) {
         putimage_withalpha(NULL, *im, x, y);
         time++;
         return 0;
@@ -55,14 +55,14 @@ Door_Death::Door_Death(int wallCat) {
     com = &DOOR_DEATH_PNG[wallCat];
     time = 0;
     select = 0;
-    cat = 0;
+    transparent = 0;
 }
 
 int Door_Death::putSelfImg(int x, int y) {
     if (select < (*com).size()){
         time++;
         putimage_withalpha(NULL, (*com)[select], x, y);
-        if (time > 15) {
+        if (time > 10) {
             select++;
             time = 0;
         }
@@ -72,3 +72,4 @@ int Door_Death::putSelfImg(int x, int y) {
 }
 
 Space sp;
+std::vector<Space*> inBag;

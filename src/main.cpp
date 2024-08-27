@@ -15,6 +15,7 @@ int main() {
     setfont(24, 0, "consolas");
     setcolor(BLACK);
     setbkmode(TRANSPARENT);
+    // setlocat
     initAll();
     while (is_run()) {
         delay_fps(120);

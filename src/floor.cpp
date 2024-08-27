@@ -17,7 +17,7 @@ int doStairs(int i) {
         return 0;
     }
     currentFloor = floorGroup[tmpFloor];
-    return 0;
+    return 1;
 }
 
 int printfPlayer(int x, int y) {
@@ -55,6 +55,18 @@ Floor::Floor(int level, int upX, int upY, int downX, int downY, short floorMsg[1
             case BLOOD_BOTTLE_B: op[i][j] = &bloodBottles[1]; break;
             case ATTACK_JEW: op[i][j] = &attackJew; break;
             case DEFENCE_JEW: op[i][j] = &defenceJew; break;
+            case STONE_SWORD: op[i][j] = &swordGroup[0]; break;
+            case IRON_SWORD: op[i][j] = &swordGroup[1]; break;
+            case SIL_SWORD: op[i][j] = &swordGroup[2]; break;
+            case WAR_SWORD: op[i][j] = &swordGroup[3]; break;
+            case SAC_SWORD: op[i][j] = &swordGroup[4]; break;
+            case DRA_SWORD: op[i][j] = &swordGroup[5]; break;
+            case STONE_SHIELD: op[i][j] = &shieldGroup[0]; break;
+            case IRON_SHIELD: op[i][j] = &shieldGroup[1]; break;
+            case SIL_SHIELD: op[i][j] = &shieldGroup[2]; break;
+            case WAR_SHIELD: op[i][j] = &shieldGroup[3]; break;
+            case SAC_SHIELD: op[i][j] = &shieldGroup[4]; break;
+            case DRA_SHIELD: op[i][j] = &shieldGroup[5]; break;
                 // case YELLO_DOOR: op[i][j] = &stair[1]; break;
             default: op[i][j] = monsterGroup[floorMsg[j][i] - 100]; break;
             }
@@ -84,7 +96,7 @@ int Floor::printFloor(int x, int y) {
     printfPlayer(x, y);
     for (int i = 0; i < 11; i++) {
         for (int j = 0; j < 11; j++) {
-            if(op[i][j]->putSelfImg(x + i * BIG_GRID, y + j * BIG_GRID)){
+            if (op[i][j]->putSelfImg(x + i * BIG_GRID, y + j * BIG_GRID)) {
                 op[i][j] = &sp;
             }
         }
@@ -100,8 +112,8 @@ int Floor::moveAndRea() {
         printfUnder("hit the wall");
         return 0;
     }
-    int cat = op[tmpX][tmpY]->getCat();
-    if (cat != WALL) {
+
+    if (!op[tmpX][tmpY]->getCat()) {
         X = tmpX;
         Y = tmpY;
     }

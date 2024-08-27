@@ -4,7 +4,7 @@
 
 Wall::Wall() {
     im = &WALL_PNG;
-    cat = 1;
+    transparent = 1;
 }
 
 int Wall::react() {
@@ -13,15 +13,17 @@ int Wall::react() {
 }
 
 Door::Door(int doorCat) {
-    cat = 1;
+    transparent = 1;
     this->doorCat = doorCat;
 }
 
 int Door::react() {
     if (keyGroup[doorCat]) {
         keyGroup[doorCat]--;
+        printfUnder("Used key, the door open");
         return 1;
     }
+    printfUnder("don't have the key");
     return 0;
 }
 
@@ -30,12 +32,18 @@ Space* Door::death(){
 }
 
 Stair::Stair(int stairCat) {
-    cat = 1;
+    transparent = 1;
     this->stairCat = stairCat;
 }
 
 int Stair::react() {
-    doStairs(stairCat);
+    if(doStairs(stairCat)){
+        if(stairCat > 0){
+            printfUnder("go upstair");
+        }else{
+            printfUnder("go downstair");
+        }
+    }
     return 0;
 }
 

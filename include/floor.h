@@ -23,7 +23,19 @@ enum objectTh {
     BLOOD_BOTTLE_A,
     BLOOD_BOTTLE_B,
     ATTACK_JEW,
-    DEFENCE_JEW
+    DEFENCE_JEW,
+    STONE_SWORD = 24,
+    IRON_SWORD,
+    SIL_SWORD,
+    WAR_SWORD,
+    SAC_SWORD,
+    DRA_SWORD,
+    STONE_SHIELD,
+    IRON_SHIELD,
+    SIL_SHIELD,
+    WAR_SHIELD,
+    SAC_SHIELD,
+    DRA_SHIELD,
 };
 
 class Floor {

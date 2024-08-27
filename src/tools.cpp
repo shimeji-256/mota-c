@@ -49,6 +49,7 @@ int initImg() {
     getComic(&BLUE_KEY_PNG, 1, 38, 1);
     getComic(&RED_KEY_PNG, 2, 38, 1);
     getComic(&GREEN_KEY_PNG, 3, 38, 1);
+    getComic(&UpAndDownStairer_PNG, 2, 40, 1);
     getComic(&BLOOD_BOTTLE_PNG_A, 0, 37, 1);
     getComic(&BLOOD_BOTTLE_PNG_B, 1, 37, 1);
     getComic(&ATTACK_JEW_PNG, 0, 36, 1);
@@ -57,6 +58,8 @@ int initImg() {
     getComic(&BLUE_DOOR_PNG, 1, 73, 1);
     getComic(&RED_DOOR_PNG, 2, 73, 1);
     getComic(&GREEN_DOOR_PNG, 3, 73, 1);
+    getCo(&SWORD_GROUP_PNG, 0, 52, 1, 0, 6);
+    getCo(&SHIELD_GROUP_PNG, 1, 52, 1, 0, 6);
     sp.getSelfImg(&SPACE_PNG);
     stair[0].getSelfImg(&DOWNSTAIR_PNG);
     stair[1].getSelfImg(&UPSTAIR_PNG);
@@ -66,12 +69,23 @@ int initImg() {
     keys[3].getSelfImg(&GREEN_KEY_PNG);
     bloodBottles[0].getSelfImg(&BLOOD_BOTTLE_PNG_A);
     bloodBottles[1].getSelfImg(&BLOOD_BOTTLE_PNG_B);
-    attackJew.getSelfImg(&ATTACK_JEW_PNG);
-    defenceJew.getSelfImg(&DEFENCE_JEW_PNG);
     door[0].getSelfImg(&YELLOW_DOOR_PNG);
     door[1].getSelfImg(&BLUE_DOOR_PNG);
     door[2].getSelfImg(&RED_DOOR_PNG);
     door[3].getSelfImg(&GREEN_DOOR_PNG);
+    swordGroup[0].getSelfImg(&SWORD_GROUP_PNG[0]);
+    swordGroup[1].getSelfImg(&SWORD_GROUP_PNG[1]);
+    swordGroup[2].getSelfImg(&SWORD_GROUP_PNG[2]);
+    swordGroup[3].getSelfImg(&SWORD_GROUP_PNG[3]);
+    swordGroup[4].getSelfImg(&SWORD_GROUP_PNG[4]);
+    swordGroup[5].getSelfImg(&SWORD_GROUP_PNG[5]);
+
+    shieldGroup[0].getSelfImg(&SHIELD_GROUP_PNG[0]);
+    shieldGroup[1].getSelfImg(&SHIELD_GROUP_PNG[1]);
+    shieldGroup[2].getSelfImg(&SHIELD_GROUP_PNG[2]);
+    shieldGroup[3].getSelfImg(&SHIELD_GROUP_PNG[3]);
+    shieldGroup[4].getSelfImg(&SHIELD_GROUP_PNG[4]);
+    shieldGroup[5].getSelfImg(&SHIELD_GROUP_PNG[5]);
 
     PLAYER_GROUP_PNG.resize(playerPngNum);
     getCo(&PLAYER_GROUP_PNG[0], 0, 24, 1, 1, 4);
@@ -184,8 +198,10 @@ int initMonster() {
     20：下楼器
     21：楼层跳转器
     22：稿子
-    23：冷冻光线
-
+    23：冰冻光线
+    24-29:各种宝剑
+    30-35：各种盾牌
+    ...
     100+：怪物
 */
 int initMap() {
@@ -207,13 +223,13 @@ int initMap() {
                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                             {0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0},
                             {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                            {0, 27, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                             {0, 0, 0, 100, 0, 0, 0, 0, 1, 0, 0},
                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0},
+                            {0, 0, 33, 0, 0, 0, 3, 0, 0, 0, 0},
                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0} };
-    floorGroup.push_back(new Floor(1, 6, 4, 5, 9, floor_1));
+    floorGroup.push_back(new Floor(1, 6, 5, 5, 9, floor_1));
 
     short floor_2[11][11] = { {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 1, 0, 0, 0, 0, 101, 0, 0},
@@ -223,10 +239,22 @@ int initMap() {
                         {0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0},
                         {0, 0, 0, 100, 0, 0, 0, 0, 1, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                        {0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0} };
     floorGroup.push_back(new Floor(2, 0, 0, 0, 0, floor_2));
+    short floor_3[11][11] = { {3, 0, 100, 101, 100, 0 ,0, 0, 0, 0, 0},
+                            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
+                            {15, 0, 0, 7, 0, 1, 17, 11, 0, 1, 0},
+                            {0, 105, 0, 1, 0, 1, 18, 15, 0, 1, 0},
+                            {1, 7, 1, 1, 0, 1, 1, 1, 7, 1, 0},
+                            {11, 0, 0, 1, 0, 7, 104, 109, 104, 1, 0},
+                            {0, 109, 0, 1, 0, 1, 1, 1, 1, 1, 0},
+                            {1, 7, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+                            {0, 0, 0, 1, 1, 7, 1, 1, 1, 7, 1},
+                            {15, 0, 11, 1, 11, 0, 0, 0, 0, 104, 0},
+                            {15, 0, 11, 1, 0, 0, 0, 0, 100, 16, 100}};
+    floorGroup.push_back(new Floor(3, 5, 10, 1, 0, floor_3));
     return 0;
 }
 
@@ -236,7 +264,6 @@ int initAttribute() {
     Defence = 2;
     Money = 0;
     Level = 1;
-    // keyGroup[4];
     CUR_PLAYER_ROW = &PLAYER_GROUP_PNG[0];
     CUR_PLAYER_PNG_ID = 0;
     TIME = 0;

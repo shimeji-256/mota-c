@@ -4,7 +4,7 @@
 #include "global.h"
 
 Monster::Monster(const char* name, int heart, int attack, int defence, int money, std::vector<PIMAGE>* FS) {
-    cat = 2;
+    transparent = 0;
     sprintf(this->name, "%s", name);
     this->heart = heart;
     this->attack = attack;

@@ -3,10 +3,14 @@
 
 #include <graphics.h>
 #include <vector>
+#include <cstdio>
 
+/*
+空白类，所有图上实体的父类
+*/
 class Space {
 public:
-    int cat;
+    bool transparent;
     PIMAGE* im;
     int getCat();
     int getSelfImg(PIMAGE* SOURCE);
@@ -36,6 +40,7 @@ public:
 };
 
 extern Space sp;
+extern std::vector<Space*> inBag;
 extern Monster_Death monster_death;
 extern Door_Death wall_death[4];
 
