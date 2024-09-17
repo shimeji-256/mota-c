@@ -9,6 +9,7 @@
 #include "monster.h"
 #include "floor.h"
 #include "eqItem.h"
+#include "npc.h"
 
 void getComic(PIMAGE* DST, int x, int y, int h) {
     *DST = newimage();
@@ -73,6 +74,7 @@ int initImg() {
     door[1].getSelfImg(&BLUE_DOOR_PNG);
     door[2].getSelfImg(&RED_DOOR_PNG);
     door[3].getSelfImg(&GREEN_DOOR_PNG);
+    npc_1.getSelfImg(0, 17, 1, 2);
     swordGroup[0].getSelfImg(&SWORD_GROUP_PNG[0]);
     swordGroup[1].getSelfImg(&SWORD_GROUP_PNG[1]);
     swordGroup[2].getSelfImg(&SWORD_GROUP_PNG[2]);
@@ -136,6 +138,8 @@ int initImg() {
     getCo(&MONSTER_GROUP_PNG[33], 0, 13, 1, 1, 2);
     getCo(&MONSTER_GROUP_PNG[34], 2, 13, 1, 1, 2);
     getCo(&MONSTER_GROUP_PNG[35], 4, 13, 1, 1, 2);
+
+    getCo(&BOSS_PNG, 0, 29, 3, 1, 2);
     return 0;
 }
 
@@ -172,10 +176,11 @@ int initMonster() {
     monsterGroup[26] = new Monster("Green Slime", 35, 18, 1, 1, &MONSTER_GROUP_PNG[26]);
     monsterGroup[27] = new Monster("Green Slime", 35, 18, 1, 1, &MONSTER_GROUP_PNG[27]);
     monsterGroup[28] = new Monster("Green Slime", 35, 18, 1, 1, &MONSTER_GROUP_PNG[28]);
+    monsterGroup[29] = new Monster("Green Slime", 35, 18, 1, 1, &MONSTER_GROUP_PNG[29]);
+    monsterGroup[30] = new Monster("Green Slime", 35, 18, 1, 1, &MONSTER_GROUP_PNG[30]);
     // monsterGroup[0] = new Monster("Green Slime", 35, 18, 1, 1, &MONSTER_GROUP_PNG[0]);
     // monsterGroup[0] = new Monster("Green Slime", 35, 18, 1, 1, &MONSTER_GROUP_PNG[0]);
-    // monsterGroup[0] = new Monster("Green Slime", 35, 18, 1, 1, &MONSTER_GROUP_PNG[0]);
-    // monsterGroup[0] = new Monster("Green Slime", 35, 18, 1, 1, &MONSTER_GROUP_PNG[0]);
+    bossp = new Boss("BOSS", 100, 100, 1, 1, &BOSS_PNG);
     return 0;
 }
 /*
@@ -205,44 +210,48 @@ int initMonster() {
     100+：怪物
 */
 int initMap() {
+    floorGroup.clear();
+    floorGroup.shrink_to_fit();
     short floor_0[11][11] = { {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 0, 0, 1, 0, 3, 0, 0, 101, 0, 0},
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-                        {0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 0, 0, 100, 0, 0, 0, 0, 1, 0, 0},
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0} };
-    floorGroup.push_back(new Floor(0, 0, 0, 4, 1, floor_0));
+                            {0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0},
+                            {0, 0, 0, 0, 16, 0, 16, 0, 0, 0, 0},
+                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                            {0, 0, 0, 29, 0, 0, 0, 35, 0, 0, 0},
+                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                            {0, 0, 0, 0, 16, 0, 16, 0, 0, 0, 0},
+                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0} };
+    floorGroup.push_back(new Floor(0, 5, 5, 5, 5, floor_0));
 
     short floor_1[11][11] = { {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 0, 1, 0, 0, 0, 0, 101, 0, 0},
                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0},
-                            {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-                            {0, 27, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 0, 100, 0, 0, 0, 0, 1, 0, 0},
+                            {0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0},
+                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                            {0, 0, 0, 30, 0, 0, 0, 24, 0, 0, 0},
+                            {0, 0, 0, 0, 0, 70, 0, 0, 0, 0, 0},
                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 33, 0, 0, 0, 3, 0, 0, 0, 0},
+                            {0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0},
+                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0} };
-    floorGroup.push_back(new Floor(1, 6, 5, 5, 9, floor_1));
+    floorGroup.push_back(new Floor(1, 5, 6, 5, 6, floor_1));
 
-    short floor_2[11][11] = { {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 0, 0, 1, 0, 0, 0, 0, 101, 0, 0},
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0},
-                        {0, 0, 0, 100, 0, 0, 0, 0, 1, 0, 0},
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0} };
-    floorGroup.push_back(new Floor(2, 0, 0, 0, 0, floor_2));
+    
+
+    short floor_2[11][11] = {   {11, 11, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+                                {11, 11, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+                                {1, 7, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+                                {0, 100, 105, 0, 0, 0, 0, 0, 0, 0, 0},
+                                {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+                                {11, 17, 110, 7, 0, 0, 0, 0, 3, 0, 0},
+                                {0, 18, 0, 1, 0, 0, 0, 0, 0, 0, 0},
+                                {15, 0, 16, 1, 0, 0, 0, 0, 0, 0, 0},
+                                {1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 0},
+                                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                {0, 0, 0, 28, 0, 0, 34, 0, 0, 0, 0} };
+    floorGroup.push_back(new Floor(2, 5, 9, 0, 0, floor_2));
     short floor_3[11][11] = { {3, 0, 100, 101, 100, 0 ,0, 0, 0, 0, 0},
                             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
                             {15, 0, 0, 7, 0, 1, 17, 11, 0, 1, 0},
@@ -253,12 +262,31 @@ int initMap() {
                             {1, 7, 1, 1, 0, 0, 0, 0, 0, 0, 0},
                             {0, 0, 0, 1, 1, 7, 1, 1, 1, 7, 1},
                             {15, 0, 11, 1, 11, 0, 0, 0, 0, 104, 0},
-                            {15, 0, 11, 1, 0, 0, 0, 0, 100, 16, 100}};
+                            {15, 21, 11, 1, 0, 0, 0, 0, 100, 16, 100} };
     floorGroup.push_back(new Floor(3, 5, 10, 1, 0, floor_3));
+
+    
+    short floor_4[11][11] = { {2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                {100,102,103,104,105,106,107,108,109,110},
+                            {111,112,113,114,115,116,117,118,119,120,121},
+                            {122,123,124,125,126,127,128,129, 0, 0, 3} };
+    floorGroup.push_back(new Floor(4, 1, 0, 0, 0, floor_4));
+
+    short floor_boss[11][11] = {};
+    floorGroup.push_back(new bossFloor(5, floor_boss));
     return 0;
 }
 
 int initAttribute() {
+    setbkcolor(GRAY);
+    setfillcolor(GRAY);
     Health = 100;
     Attack = 30;
     Defence = 2;
@@ -268,9 +296,10 @@ int initAttribute() {
     CUR_PLAYER_PNG_ID = 0;
     TIME = 0;
     printfUnder("finish init");
+    curConversat = NULL;
 
-    X = 0;
-    Y = 0;
+    X = 5;
+    Y = 6;
     Dx = 0;
     Dy = 0;
 

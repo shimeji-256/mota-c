@@ -6,6 +6,7 @@
 #include "monster.h"
 #include "global.h"
 #include "eqItem.h"
+#include "npc.h"
 
 int doStairs(int i) {
     int tmpFloor = i + currentFloor->getLevel();
@@ -29,6 +30,7 @@ int printfPlayer(int x, int y) {
     }
     return 0;
 }
+
 
 Floor::Floor(int level, int upX, int upY, int downX, int downY, short floorMsg[11][11]) {
     this->level = level;
@@ -55,6 +57,7 @@ Floor::Floor(int level, int upX, int upY, int downX, int downY, short floorMsg[1
             case BLOOD_BOTTLE_B: op[i][j] = &bloodBottles[1]; break;
             case ATTACK_JEW: op[i][j] = &attackJew; break;
             case DEFENCE_JEW: op[i][j] = &defenceJew; break;
+            case UP_AND_DOWN_ST: op[i][j] = &Up_And_Down_Stairer; break;
             case STONE_SWORD: op[i][j] = &swordGroup[0]; break;
             case IRON_SWORD: op[i][j] = &swordGroup[1]; break;
             case SIL_SWORD: op[i][j] = &swordGroup[2]; break;
@@ -67,6 +70,7 @@ Floor::Floor(int level, int upX, int upY, int downX, int downY, short floorMsg[1
             case WAR_SHIELD: op[i][j] = &shieldGroup[3]; break;
             case SAC_SHIELD: op[i][j] = &shieldGroup[4]; break;
             case DRA_SHIELD: op[i][j] = &shieldGroup[5]; break;
+            case NPC_1: op[i][j] = &npc_1; break;
                 // case YELLO_DOOR: op[i][j] = &stair[1]; break;
             default: op[i][j] = monsterGroup[floorMsg[j][i] - 100]; break;
             }
@@ -117,11 +121,51 @@ int Floor::moveAndRea() {
         X = tmpX;
         Y = tmpY;
     }
-    if (op[tmpX][tmpY]->react() == 1) {
+    int tmpi = op[tmpX][tmpY]->react();
+    if (tmpi == 1) {
         op[tmpX][tmpY] = op[tmpX][tmpY]->death();
+    } else if (tmpi < 0) {
+        curConversat = &death;
     }
     return 0;
 }
 
 std::vector<Floor*> floorGroup;
 Floor* currentFloor;
+
+// bossFloor::bossFloor(int level, int upX, int upY, int downX, int downY, short floorMsg[11][11]) {
+//     this->level = level;
+//     upPosX = 10;
+//     downPosX = 10;
+//     upPosY = 9;
+//     downPosY = 9;
+//     op[10][10] = &stair[0];
+//     op[4][4] = bossp;
+// };
+
+bossFloor::bossFloor(int level, short floorMsg[11][11]) : Floor(level, 10, 9, 10, 9, floorMsg) {
+    op[10][10] = &stair[0];
+    op[4][4] = bossp;
+}
+
+int bossFloor::moveAndRea() {
+    int tmpX = X + Dx, tmpY = Y + Dy;
+    Dx = 0;
+    Dy = 0;
+    if (tmpX < 0 || tmpY < 0 || tmpX > 10 || tmpY > 10) {
+        printfUnder("hit the wall");
+        return 0;
+    }
+    X = tmpX;
+    Y = tmpY;
+    if(X > 3 && Y > 3 && X<7 && Y < 7){
+        int tmpi = bossp->react();
+        if(tmpi > 0){
+            op[tmpX][tmpY] = op[tmpX][tmpY]->death();
+            curConversat = &winC;
+        }else{
+            curConversat = &death;
+        }
+    }
+    return 0;
+}

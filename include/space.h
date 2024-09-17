@@ -13,7 +13,7 @@ public:
     bool transparent;
     PIMAGE* im;
     int getCat();
-    int getSelfImg(PIMAGE* SOURCE);
+    virtual int getSelfImg(PIMAGE* SOURCE);
     virtual int putSelfImg(int x, int y);
     virtual int react();
     virtual Space* death();

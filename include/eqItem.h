@@ -82,6 +82,7 @@ class UpAndDownStairer : public Space {
 private:
     bool inHand;
 public:
+    bool have();
     int react();
     int abandon();
     int jump(int i);

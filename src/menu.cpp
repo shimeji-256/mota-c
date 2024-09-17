@@ -5,6 +5,7 @@
 #include "floor.h"
 #include "tools.h"
 #include "eqItem.h"
+#include "conversat.h"
 
 Menu::Menu() {
     menuImg = newimage();
@@ -111,6 +112,15 @@ int Menu::update() {
     xyprintf(0, 13 * BIG_GRID, "%s", underWord);
 
     currentFloor->printFloor(5 * BIG_GRID, BIG_GRID);
+
+    if(Up_And_Down_Stairer.have()){
+        putimage_withalpha(NULL, UpAndDownStairer_PNG, RrightBord, 72 + 5 * BIG_GRID + 10);
+    }
+
+    if(curConversat != NULL){
+        curConversat->show(6*BIG_GRID, 3*BIG_GRID);
+    }
+
     return 0;
 }
 

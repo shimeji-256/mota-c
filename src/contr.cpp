@@ -4,6 +4,7 @@
 #include "floor.h"
 #include "global.h"
 #include "tools.h"
+#include "eqItem.h"
 
 void positionOffset(int key);
 
@@ -40,6 +41,8 @@ void positionOffset(int key) {
     case 'W': case key_up:		Dy = -1;	CUR_PLAYER_ROW = &PLAYER_GROUP_PNG[3]; break;	//上移
     case 'D': case key_right:	Dx = 1;	    CUR_PLAYER_ROW = &PLAYER_GROUP_PNG[2]; break;	//右移
     case 'S': case key_down:	Dy = 1;	    CUR_PLAYER_ROW = &PLAYER_GROUP_PNG[0]; break;	//下移
+    case 'U': Up_And_Down_Stairer.jump(1); break;
+    case 'R': Up_And_Down_Stairer.jump(-1); break;
     case key_esc: exit(0); break; default:  break;	//其他键不移动
     }
     currentFloor->moveAndRea();

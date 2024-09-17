@@ -28,6 +28,7 @@ std::vector<std::vector<PIMAGE>> MONSTER_GROUP_PNG;
 std::vector<std::vector<PIMAGE>> PLAYER_GROUP_PNG;
 std::vector<PIMAGE> SWORD_GROUP_PNG;
 std::vector<PIMAGE> SHIELD_GROUP_PNG;
+std::vector<PIMAGE> BOSS_PNG;
 std::vector<std::vector<PIMAGE>> DOOR_DEATH_PNG;
 std::vector<PIMAGE> *CUR_PLAYER_ROW;
 int CUR_PLAYER_PNG_ID = 0;
@@ -40,6 +41,8 @@ int Level = 0;
 int keyGroup[4] = {1, 0, 0, 0};
 int TIME = 0;
 char underWord[100] = "reset success";
+bool HaveConveriation = 0;
+char converation[200];
 
 int X = 0;
 int Y = 0;

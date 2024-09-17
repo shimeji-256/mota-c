@@ -1,5 +1,4 @@
 #include <graphics.h>
-#include <cstdio>
 
 #include "tools.h"
 #include "global.h"

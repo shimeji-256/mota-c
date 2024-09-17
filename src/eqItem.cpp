@@ -1,6 +1,7 @@
 #include "eqItem.h"
 #include "global.h"
 #include "floor.h"
+#include "conversat.h"
 
 Key::Key(int keyCat) {
     transparent = 0;
@@ -86,7 +87,7 @@ char* Sword::getName() {
 }
 
 Sword swordGroup[6] = { Sword(0, "stone sword", 5), Sword(1, "iorn sword", 10),Sword(2, "silver sword", 20),
-                        Sword(3, "warrior sword", 40),Sword(4, "sacred sword", 80),Sword(5, "dragon sword", 160) };
+                        Sword(3, "warrior sword", 40),Sword(4, "sacred sword", 80),Sword(5, "dragon sword", 999) };
 Sword* equipingSword = NULL;
 
 Shield::Shield(int shieldCat, const char* na, int defen) {
@@ -123,11 +124,16 @@ char* Shield::getName() {
 }
 
 Shield shieldGroup[6] = { Shield(0, "stone shield", 5), Shield(1, "iorn shield", 10),Shield(2, "silver shield", 20),
-                        Shield(3, "warrior shield", 40),Shield(4, "sacred shield", 80),Shield(5, "dragon shield", 160) };
+                        Shield(3, "warrior shield", 40),Shield(4, "sacred shield", 80),Shield(5, "dragon shield", 999) };
 Shield* equipingShield = NULL;
+
+bool UpAndDownStairer::have() {
+    return inHand;
+}
 
 int UpAndDownStairer::react() {
     inHand = 1;
+    curConversat = new Conversat(432, 240, "You got the stairJumper\nPress U to go upstair\nPress R to go downstair");
     return 1;
 }
 

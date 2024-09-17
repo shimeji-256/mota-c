@@ -46,6 +46,7 @@ extern std::vector<std::vector<PIMAGE>> DOOR_DEATH_PNG; //开门图像
 extern std::vector<PIMAGE> SWORD_GROUP_PNG; //各种剑的图像
 extern std::vector<PIMAGE> SHIELD_GROUP_PNG; //各种盾的图像
 extern std::vector<PIMAGE>* CUR_PLAYER_ROW; //当前玩家朝向
+extern std::vector<PIMAGE> BOSS_PNG;
 extern int CUR_PLAYER_PNG_ID; //当前玩家动作
 
 extern int Health;
@@ -60,6 +61,8 @@ extern int Dx;
 extern int Dy;
 extern int TIME;
 extern char underWord[100];
+extern bool HaveConveriation;
+extern char converation[200];
 
 void printfUnder(const char* src);
 

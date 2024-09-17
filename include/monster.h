@@ -22,4 +22,19 @@ public:
 
 extern Monster *monsterGroup[monsterNum];
 
+class Boss : public Space{
+private:
+    std::vector<PIMAGE> *FACE;
+    char name[20];
+    int time, selected;
+    int heart, attack, defence, money;
+public:
+    Boss(const char* name, int heart, int attack, int defence, int money, std::vector<PIMAGE> *FS);
+    int putSelfImg(int x, int y);
+    Space* death();
+    int react();
+};
+
+extern Boss * bossp;
+
 #endif

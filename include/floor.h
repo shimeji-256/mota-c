@@ -24,6 +24,7 @@ enum objectTh {
     BLOOD_BOTTLE_B,
     ATTACK_JEW,
     DEFENCE_JEW,
+    UP_AND_DOWN_ST = 21,
     STONE_SWORD = 24,
     IRON_SWORD,
     SIL_SWORD,
@@ -36,10 +37,11 @@ enum objectTh {
     WAR_SHIELD,
     SAC_SHIELD,
     DRA_SHIELD,
+    NPC_1 = 70,
 };
 
 class Floor {
-private:
+protected:
     int upPosX, upPosY;
     int downPosX, downPosY;
     int level;
@@ -49,10 +51,16 @@ public:
     int getLevel();
     int toFloor();
     int printFloor(int x, int y);
-    int moveAndRea();
+    virtual int moveAndRea();
 };
 
 extern std::vector<Floor*> floorGroup;
 extern Floor* currentFloor;
+
+class bossFloor : public Floor {
+public:
+    bossFloor(int level,  short floorMsg[11][11]);
+    int moveAndRea();
+};
 
 #endif
